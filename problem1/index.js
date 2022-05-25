@@ -8,7 +8,6 @@ const axios = require('axios').default;
 const app = express();
 const PORT = process.env.PORT || 3000;
 
-
 // middleware
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
@@ -56,7 +55,7 @@ app.get('/numbers', (req, res) => {
                 await data.data.numbers.forEach((num) => {
                     set.add(num);
                 })
-                
+
             }
         })
 
