@@ -17,6 +17,42 @@ app.use(cors());
 
 const items = ['bonfire', 'fibonacci', 'primes', 'odd', 'rand', 'even', 'cardio', 'case', 'character', 'bonsai'];
 
+const isUniquePrefix = (items, prefix) => {
+    return !items.some(item => item.startsWith(prefix))
+  }
+  
+  const buildPrefix = (item, items) => {
+    let prefix = ''
+    for (const char of item) {
+      prefix += char
+      if (isUniquePrefix(items, prefix)) {
+        break
+      }
+    }
+    return prefix
+  }
+
+  const uniquePrefixes = (items, { alias } = {}) => {
+    const output = alias ? {} : []
+    for (const item of items) {
+      // an array that excludes the present item
+      const itemsWithoutItem = items.filter(element => element !== item)
+      const validPrefix = buildPrefix(item, itemsWithoutItem)
+  
+      if (validPrefix) {
+        if (alias) {
+          output[validPrefix] = item
+        } else {
+          output.push(validPrefix)
+        }
+      }
+    }
+    return output
+  }
+  
+
+  
+  const prefixes = uniquePrefixes(items, { alias: false })
 
 
 // routes
@@ -36,10 +72,13 @@ app.get('/prefixes', (req, res) => {
     keywords.forEach((keyword) => {
         if(items.includes(keyword)) {
             // const prefix = shortest-unique-prefix(items) // could not implement shortest unique prefix
+            console.log(prefixes);
+            const prefix = prefixes.filter(prefix => keyword.startsWith(prefix))[0];
+            // console.log(prefix);
             result.push({
                 keyword,
                 status: 'found',
-                prefix: 'prefix'
+                prefix
             })
         } else {
             result.push({
