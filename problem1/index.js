@@ -1,4 +1,5 @@
 const cors = require('cors');
+const { response } = require('express');
 const express = require('express');
 const mongoose = require('mongoose');
 const axios = require('axios').default;
@@ -26,7 +27,9 @@ const URLS = [
 
 const getData = async (url) => {
     try {
-        const response = await axios.get(url);
+        const response = await axios.get(url, {
+            timeout: 500
+        });
         return response;
     } catch (error) {
         console.log(error);
@@ -48,22 +51,18 @@ app.get('/numbers', (req, res) => {
     if(req.query.url && req.query.url.length > 0) {
         req.query.url.forEach(async (url) => {
             if(URLS.includes(url)) {
-                const data = await getData(url);
-                console.log(data.data.numbers)
-                data.data.numbers.forEach((num) => {
+                let data = await getData(url);
+                console.log(data.data.numbers);
+                await data.data.numbers.forEach((num) => {
                     set.add(num);
                 })
-                // console.log(set)
+                
             }
         })
-        console.log(set)
-        // res.json({ result });
+
     }
-    // console.log(set)
-    // if(numbers.length > 0) {
-    //     numbers.sort((a, b) => a - b);
-    // }
-    // console.log(result)
+    console.log(set)
+
     set?.forEach((num) => {
         result.push(num);
     })
