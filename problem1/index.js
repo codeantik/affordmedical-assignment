@@ -1,5 +1,4 @@
 const cors = require('cors');
-const { response } = require('express');
 const express = require('express');
 const mongoose = require('mongoose');
 const axios = require('axios').default;
@@ -52,7 +51,7 @@ app.get('/numbers', (req, res) => {
             if(URLS.includes(url)) {
                 let data = await getData(url);
                 console.log(data.data.numbers);
-                await data.data.numbers.forEach((num) => {
+                data.data.numbers.forEach((num) => {
                     set.add(num);
                 })
 
