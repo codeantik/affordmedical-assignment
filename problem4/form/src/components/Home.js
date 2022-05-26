@@ -4,9 +4,9 @@ import { useNavigate } from "react-router-dom";
 export const  Home = () => {
     const navigate = useNavigate();
 
-    useLayoutEffect(() => {
-        navigate('/register');
-    }, []);
+    // useLayoutEffect(() => {
+    //     navigate('/register');
+    // }, []);
 
     return (
         <div className="home">

@@ -12,9 +12,9 @@ function App() {
     <div className='App'>
       {/* <h1>Welcome to React Router!</h1> */}
       <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/register" element={<Register />} />
-        <Route path="/login" element={<Login />} />
+        <Route exact path="/home" element={<Home />} />
+        <Route exact path="/" element={<Register />} />
+        <Route exact path="/login" element={<Login />} />
       </Routes>
     </div>
   );

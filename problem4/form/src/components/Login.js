@@ -12,7 +12,7 @@ export const Login = () => {
         console.log(data);
         const response = await axios.post('http://localhost:5000/login', data);
         console.log(response);
-        navigate('/')
+        navigate('/home')
     }
 
     const onFinish = (values) => {
