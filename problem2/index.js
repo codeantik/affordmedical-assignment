@@ -71,7 +71,6 @@ app.get('/prefixes', (req, res) => {
     let found = []
     keywords.forEach((keyword) => {
         if(items.includes(keyword)) {
-            // const prefix = shortest-unique-prefix(items) // could not implement shortest unique prefix
             console.log(prefixes);
             const prefix = prefixes.filter(prefix => keyword.startsWith(prefix))[0];
             // console.log(prefix);

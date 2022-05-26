@@ -1,2 +1,6 @@
 ###
 GET http://localhost:3000/numbers?url=http://something.com/primes&url=http://anything.com/fibo&url=http://localhost:8090/rand
+
+
+###
+GET http://localhost:3000/numbers?url=http://localhost:8090/primes&url=http://localhost:8090/fibo&url=http://localhost:8090/rand
